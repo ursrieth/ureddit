@@ -1,17 +1,31 @@
 {
   "manifest_version": 3,
-  "name": "Ureddit – Market Intelligence Scraper",
-  "version": "1.0.0",
-  "description": "Extract and analyze Reddit threads for business insights, pain points, and market opportunities.",
+  "name": "Ureddit — Multi-source Pain-point Research",
+  "version": "5.0.0",
+  "description": "Scrape Reddit threads, Hacker News items, Stack Overflow questions, and GitHub issues — with semantic clustering, persistent archive, and AI-ready exports. Built for systematic pain-point market research across five complementary signal sources.",
   "permissions": [
     "activeTab",
     "scripting",
-    "downloads"
+    "downloads",
+    "clipboardWrite",
+    "storage",
+    "unlimitedStorage",
+    "sidePanel",
+    "tabs"
   ],
   "host_permissions": [
     "https://www.reddit.com/*",
     "https://old.reddit.com/*",
-    "https://new.reddit.com/*"
+    "https://new.reddit.com/*",
+    "https://news.ycombinator.com/*",
+    "https://hacker-news.firebaseio.com/*",
+    "https://hn.algolia.com/*",
+    "https://stackoverflow.com/*",
+    "https://api.stackexchange.com/*",
+    "https://github.com/*",
+    "https://api.github.com/*",
+    "https://api.anthropic.com/*",
+    "https://api.openai.com/*"
   ],
   "action": {
     "default_popup": "popup.html",
@@ -21,11 +35,15 @@
       "128": "icons/icon128.png"
     }
   },
+  "side_panel": {
+    "default_path": "popup.html"
+  },
   "content_scripts": [
     {
       "matches": [
-        "https://www.reddit.com/r/*/comments/*",
-        "https://old.reddit.com/r/*/comments/*"
+        "https://www.reddit.com/r/*",
+        "https://old.reddit.com/r/*",
+        "https://new.reddit.com/r/*"
       ],
       "js": ["content.js"],
       "run_at": "document_idle"
